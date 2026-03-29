@@ -10,7 +10,7 @@ def spell_combiner(spell1: callable, spell2: callable) -> callable:
 
 
 def power_amplifier(base_spell: callable, multiplier: int) -> callable:
-    def mega_fireball(target: str) -> None:
+    def mega_fireball(target: str) -> int:
         result = base_spell(target)
         return result * multiplier
 
@@ -41,7 +41,7 @@ def heal(target: str) -> str:
     return f"Heals {target}"
 
 
-def mana_generator(target: str) -> str:
+def mana_generator(target: str) -> int:
     return 10
 
 

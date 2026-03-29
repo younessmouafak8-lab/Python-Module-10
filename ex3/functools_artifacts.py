@@ -3,7 +3,7 @@ from operator import add, mul
 from typing import Any
 
 
-def spell_reducer(spells: list[int], operation: str) -> int:
+def spell_reducer(spells: list[int], operation: str) -> int | None:
     result = None
 
     ops = {

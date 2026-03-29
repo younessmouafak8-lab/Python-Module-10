@@ -4,7 +4,7 @@ from typing import Any
 def mage_counter() -> callable:
     counter = 0
 
-    def count() -> callable:
+    def count() -> int:
         nonlocal counter
         counter += 1
         return counter
@@ -14,7 +14,7 @@ def mage_counter() -> callable:
 
 def spell_accumulator(initial_power: int) -> callable:
 
-    def accumulate_power(power: int) -> callable:
+    def accumulate_power(power: int) -> int:
         nonlocal initial_power
         initial_power += power
         return initial_power

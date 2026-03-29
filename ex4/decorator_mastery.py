@@ -4,10 +4,10 @@ import time
 
 def spell_timer(func: callable) -> callable:
     @wraps(func)
-    def casting() -> str | None:
+    def casting(*args, **kwargs) -> str | None:
         start = time.time()
         print(f"Casting {func.__name__}...")
-        result = func()
+        result = func(*args, **kwargs)
         end = time.time()
         print(f"Spell completed in {(end - start):.6f} seconds")
         return result
@@ -18,7 +18,7 @@ def spell_timer(func: callable) -> callable:
 def power_validator(min_power: int) -> callable:
     def validate(func: callable) -> callable:
         @wraps(func)
-        def validate_inner(self, spell_name, power, *args,
+        def validate_inner(self, spell_name: str, power: int, *args,
                            **kwargs) -> str | None:
             if power >= min_power:
                 return func(self, spell_name, power, *args, **kwargs)
@@ -30,13 +30,15 @@ def power_validator(min_power: int) -> callable:
 
 def retry_spell(max_attempts: int) -> callable:
     def retry(func: callable) -> callable:
+        @wraps(func)
         def inner(*args, **kwargs) -> str | None:
             for i in range(1, max_attempts + 1):
                 try:
                     res = func(*args, **kwargs)
                     return res
                 except Exception:
-                    print(f"Spell failed, retrying... ({i}/{max_attempts})")
+                    print("Spell failed, retrying... "
+                          f"(attempt {i}/{max_attempts})")
             return f"Spell casting failed after {max_attempts} attempts"
         return inner
     return retry
@@ -68,8 +70,8 @@ def main() -> None:
     mage_guild = MageGuild()
     print(mage_guild.validate_mage_name("Magic"))
     print(mage_guild.validate_mage_name("Magic1"))
-    print(mage_guild.cast_spell("Lightning", 15))
-    print(mage_guild.cast_spell("Lightning", 5))
+    print(mage_guild.cast_spell("Lightning", power=15))
+    print(mage_guild.cast_spell("Lightning", power=5))
 
 
 main()
