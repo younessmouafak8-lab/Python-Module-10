@@ -70,8 +70,8 @@ def main() -> None:
     mage_guild = MageGuild()
     print(mage_guild.validate_mage_name("Magic"))
     print(mage_guild.validate_mage_name("Magic1"))
-    print(mage_guild.cast_spell("Lightning", power=15))
-    print(mage_guild.cast_spell("Lightning", power=5))
+    print(mage_guild.cast_spell("Lightning", 15))
+    print(mage_guild.cast_spell("Lightning", 5))
 
 
 main()
