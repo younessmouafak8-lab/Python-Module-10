@@ -57,14 +57,14 @@ class MageGuild:
         return f"Successfully cast {spell_name} with {power} power"
 
 
+@spell_timer
 def fireball() -> str:
     return "Fireball cast!"
 
 
 def main() -> None:
     print("\nTesting spell timer...")
-    func = spell_timer(fireball)
-    print(f"Result: {func()}")
+    print(f"Result: {fireball()}")
 
     print("\nTesting MageGuild...")
     mage_guild = MageGuild()
