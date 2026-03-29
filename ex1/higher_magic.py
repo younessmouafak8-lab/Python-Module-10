@@ -1,13 +1,16 @@
+from typing import Any
+
+
 def spell_combiner(spell1: callable, spell2: callable) -> callable:
 
-    def combined(target):
+    def combined(target: str) -> tuple:
         return (spell1(target), spell2(target))
 
     return combined
 
 
 def power_amplifier(base_spell: callable, multiplier: int) -> callable:
-    def mega_fireball(target):
+    def mega_fireball(target: str) -> None:
         result = base_spell(target)
         return result * multiplier
 
@@ -15,7 +18,7 @@ def power_amplifier(base_spell: callable, multiplier: int) -> callable:
 
 
 def conditional_caster(condition: callable, spell: callable) -> callable:
-    def caster(trick):
+    def caster(trick: Any) -> str | Any:
         if condition(trick):
             return spell(trick)
         return "Spell fizzled"
@@ -24,25 +27,25 @@ def conditional_caster(condition: callable, spell: callable) -> callable:
 
 
 def spell_sequence(spells: list[callable]) -> callable:
-    def cast_all_spells(trick):
+    def cast_all_spells(trick: str) -> list[str | Any]:
         results = [spell(trick) for spell in spells]
         return results
     return cast_all_spells
 
 
-def fire_ball(target):
+def fire_ball(target: str) -> str:
     return f"Fireball hits {target}"
 
 
-def heal(target):
+def heal(target: str) -> str:
     return f"Heals {target}"
 
 
-def mana_generator(target):
+def mana_generator(target: str) -> str:
     return 10
 
 
-def main():
+def main() -> None:
     print("\nTesting spell combiner...")
     combined = spell_combiner(fire_ball, heal)
     fire, healing = combined("Dragon")

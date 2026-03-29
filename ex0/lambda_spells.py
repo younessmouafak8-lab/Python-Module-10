@@ -23,7 +23,7 @@ def mage_stats(mages: list[dict]) -> dict:
             'avg_power': round(avg_power, 2)}
 
 
-def main():
+def main() -> None:
     fire_staff = {'name': "Fire Staff", 'power': 92, 'type': "Fire"}
     crystal_orb = {'name': "Crystal Orb", 'power': 85, 'type': "Crystal"}
     print("\nTesting artifact sorter...")

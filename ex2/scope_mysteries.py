@@ -1,7 +1,10 @@
+from typing import Any
+
+
 def mage_counter() -> callable:
     counter = 0
 
-    def count():
+    def count() -> callable:
         nonlocal counter
         counter += 1
         return counter
@@ -11,7 +14,7 @@ def mage_counter() -> callable:
 
 def spell_accumulator(initial_power: int) -> callable:
 
-    def accumulate_power(power):
+    def accumulate_power(power: int) -> callable:
         nonlocal initial_power
         initial_power += power
         return initial_power
@@ -29,10 +32,10 @@ def enchantment_factory(enchantment_type: str) -> callable:
 def memory_vault() -> dict[str, callable]:
     dic = {}
 
-    def store(key, value):
+    def store(key: str, value: int) -> None:
         dic[key] = value
 
-    def recall(key):
+    def recall(key: str) -> Any:
         return dic.get(key, "Memory not found")
 
     return {
@@ -41,7 +44,7 @@ def memory_vault() -> dict[str, callable]:
     }
 
 
-def main():
+def main() -> None:
     print("\nTesting mage counter...")
     counter = mage_counter()
     for i in range(3):

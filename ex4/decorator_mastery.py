@@ -4,7 +4,7 @@ import time
 
 def spell_timer(func: callable) -> callable:
     @wraps(func)
-    def casting():
+    def casting() -> str | None:
         start = time.time()
         print(f"Casting {func.__name__}...")
         result = func()
@@ -55,11 +55,11 @@ class MageGuild:
         return f"Successfully cast {spell_name} with {power} power"
 
 
-def fireball():
+def fireball() -> str:
     return "Fireball cast!"
 
 
-def main():
+def main() -> None:
     print("\nTesting spell timer...")
     func = spell_timer(fireball)
     print(f"Result: {func()}")

@@ -1,5 +1,6 @@
 from functools import reduce, partial, lru_cache, singledispatch
 from operator import add, mul
+from typing import Any
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
@@ -37,26 +38,26 @@ def memoized_fibonacci(n: int) -> int:
 def spell_dispatcher() -> callable:
 
     @singledispatch
-    def dispatcher_function(value):
+    def dispatcher_function(value: Any) -> None:
         ...
 
     @dispatcher_function.register
-    def _(value: int):
+    def _(value: int) -> str:
         return f'deal {value} damage'
 
     @dispatcher_function.register
-    def _(value: str):
+    def _(value: str) -> str:
         return value
 
     @dispatcher_function.register
-    def _(value: list):
+    def _(value: list) -> list:
         results = [dispatcher_function(spell) for spell in value]
         return results
 
     return dispatcher_function
 
 
-def main():
+def main() -> None:
 
     print("\nTesting spell reducer...")
     print(f"Sum: {spell_reducer([25, 25, 25, 25], 'add')}")
