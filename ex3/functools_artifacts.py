@@ -3,7 +3,7 @@ from operator import add, mul
 from typing import Any
 
 
-def spell_reducer(spells: list[int], operation: str) -> int | None:
+def spell_reducer(spells: list[int], operation: str) -> int:
     result = None
 
     ops = {
@@ -14,6 +14,8 @@ def spell_reducer(spells: list[int], operation: str) -> int | None:
         }
     if operation in ops:
         result = reduce(ops[operation], spells)
+    if operation not in ops:
+        raise ValueError("Invalid operation")
     return result
 
 
@@ -38,7 +40,7 @@ def memoized_fibonacci(n: int) -> int:
 def spell_dispatcher() -> callable:
 
     @singledispatch
-    def dispatcher_function(value: Any) -> None:
+    def dispatcher_function(value: Any) -> Any:
         ...
 
     @dispatcher_function.register
@@ -69,4 +71,7 @@ def main() -> None:
     print(f"Fib(15): {memoized_fibonacci(15)}")
 
 
-main()
+try:
+    main()
+except Exception as e:
+    print(f"{e.__class__.__name__}: {e}")

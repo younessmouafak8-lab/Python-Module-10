@@ -58,4 +58,7 @@ def main() -> None:
     print(f"Original: {mana}, Amplified: {amplified_mana}")
 
 
-main()
+try:
+    main()
+except Exception as e:
+    print(f"{e.__class__.__name__}: {e}")

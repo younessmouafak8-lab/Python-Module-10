@@ -74,4 +74,7 @@ def main() -> None:
     print(mage_guild.cast_spell("Lightning", 5))
 
 
-main()
+try:
+    main()
+except Exception as e:
+    print(f"{e.__class__.__name__}: {e}")

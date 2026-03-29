@@ -13,11 +13,13 @@ def spell_transformer(spells: list[str]) -> list[str]:
 
 
 def mage_stats(mages: list[dict]) -> dict:
+    if not mages:
+        return {'max_power': 0, 'min_power': 0, 'avg_power': 0.0}
     max_power = max(mages, key=lambda x: x['power'])
     min_power = min(mages, key=lambda x: x['power'])
     total_mages = len(mages)
     power_sum = sum(map(lambda x: x['power'], mages))
-    avg_power = 0 if total_mages == 0 else power_sum / total_mages
+    avg_power = power_sum / total_mages
     return {'max_power': max_power['power'],
             'min_power': min_power['power'],
             'avg_power': round(avg_power, 2)}
@@ -42,4 +44,7 @@ def main() -> None:
     print()
 
 
-main()
+try:
+    main()
+except Exception as e:
+    print(f"{e.__class__.__name__}: {e}")

@@ -30,7 +30,7 @@ def enchantment_factory(enchantment_type: str) -> callable:
 
 
 def memory_vault() -> dict[str, callable]:
-    dic = {}
+    dic: dict[str, Any] = {}
 
     def store(key: str, value: int) -> None:
         dic[key] = value
@@ -57,4 +57,7 @@ def main() -> None:
     print(frozen("Shield"))
 
 
-main()
+try:
+    main()
+except Exception as e:
+    print(f"{e.__class__.__name__}: {e}")
